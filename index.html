@@ -1,64 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>passnine | Global Trade Brokerage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        section { min-height: 80vh; padding: 4rem 2rem; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
+        .hero-bg { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2000'); }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
 
-    <nav class="fixed w-full z-50 p-4 flex justify-between items-center glass">
-        <h1 class="text-xl font-bold uppercase">passnine</h1>
-        <div class="space-x-4 text-sm font-semibold">
-            <a href="#about">About</a> <a href="#sugar">Sugar</a> <a href="#chicken">Chicken</a> <a href="#contact">Contact</a>
+    <nav class="fixed w-full z-50 p-4 glass border-b border-white/20 flex justify-between items-center">
+        <h1 class="text-xl font-bold uppercase tracking-widest">passnine</h1>
+        <div class="hidden md:flex space-x-6 text-sm font-semibold">
+            <a href="#home" class="hover:text-blue-600">Home</a>
+            <a href="#history" class="hover:text-blue-600">History</a>
+            <a href="#sugar" class="hover:text-blue-600">Sugar</a>
+            <a href="#chicken" class="hover:text-blue-600">Chicken Paw</a>
+            <a href="#about" class="hover:text-blue-600">About</a>
         </div>
     </nav>
 
-    <section class="h-screen flex items-center justify-center bg-cover bg-center text-white" 
-             style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9');">
-        <div class="text-center">
-            <h2 class="text-5xl font-bold mb-4">Connecting Brazil to the World</h2>
-            <p class="text-xl">Premium Brokerage: Sugar, Chicken Paws, and More</p>
+    <section id="home" class="hero-bg h-screen bg-cover bg-center flex items-center justify-center text-white text-center">
+        <div>
+            <h2 class="text-5xl md:text-7xl font-bold mb-4">passnine</h2>
+            <p class="text-lg md:text-2xl">Brazilian Commodity Trading Brokerage</p>
         </div>
     </section>
 
-    <main class="max-w-5xl mx-auto">
-        <section id="sugar" class="glass rounded-3xl my-8">
-            <h2 class="text-3xl font-bold mb-6">Sugar Trade (ICUMSA45 / VHP)</h2>
-            <p>Origin: Brazil | SGS & CCIC Inspection | Flexible terms (FCA/FOB/CIF).</p>
-            <button onclick="openModal()" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-full">Request Inquiry</button>
+    <main class="max-w-4xl mx-auto px-6 py-12 space-y-20">
+        <section id="history">
+            <h2 class="text-3xl font-bold mb-6">Company History</h2>
+            <p>2023년부터 브라질-중국, 브라질-한국, 중국-한국 간의 중개 무역을 전문으로 하고 있습니다.</p>
         </section>
 
-        <section id="chicken" class="glass rounded-3xl my-8">
-            <h2 class="text-3xl font-bold mb-6">Chicken Paw Trade</h2>
-            <p>Exclusive supply of BRF and JBS products. Quality guaranteed.</p>
+        <section id="sugar">
+            <h2 class="text-3xl font-bold mb-6">Sugar Trade</h2>
+            <p class="mb-4">브라질산 ICUMSA45, VHP 제품 취급. SGS/CCIC 검사 진행 및 FCA/FOB/CIF 조건 협의.</p>
+            <button onclick="openModal('Sugar')" class="bg-blue-600 text-white px-6 py-2 rounded-full">Inquiry</button>
+        </section>
+
+        <section id="chicken">
+            <h2 class="text-3xl font-bold mb-6">Chicken Paw</h2>
+            <p class="mb-4">BRF, JBS 제품 전문 취급. 안전한 거래를 위한 구매대행 서비스 제공.</p>
+            <button onclick="openModal('Chicken Paw')" class="bg-blue-600 text-white px-6 py-2 rounded-full">Inquiry</button>
+        </section>
+
+        <section id="about">
+            <h2 class="text-3xl font-bold mb-6">Contact</h2>
+            <p>최학기 (KMC FOUNDATION)</p>
+            <p>Email: choihakki@gmail.com</p>
+            <p>WhatsApp: +82-10-5561-7107</p>
+            <p>WeChat: hakki0729</p>
         </section>
     </main>
 
-    <div id="modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-lg">
-            <h2 class="text-2xl font-bold mb-4">Inquiry Request</h2>
-            <form action="https://formspree.io/f/YOUR_ID" method="POST">
-                <select name="item" class="w-full p-3 mb-4 border rounded">
-                    <option value="Sugar">ICUMSA45 / VHP</option>
-                    <option value="Chicken">Chicken Paw</option>
-                </select>
-                <input type="text" name="name" placeholder="Name" required class="w-full p-3 mb-4 border rounded">
-                <input type="email" name="email" placeholder="Email" required class="w-full p-3 mb-4 border rounded">
-                <textarea name="message" placeholder="Message" class="w-full p-3 mb-4 border rounded"></textarea>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded">Submit</button>
-                <button type="button" onclick="closeModal()" class="w-full mt-2 text-slate-400">Close</button>
+    <div id="modal" class="fixed inset-0 bg-black/60 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-2xl w-full max-w-lg shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4" id="modalTitle">Inquiry</h2>
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="hidden" name="item" id="hiddenItem">
+                <input type="text" name="name" placeholder="Name (Required)" required class="w-full p-3 mb-3 border rounded">
+                <input type="email" name="email" placeholder="Email (Required)" required class="w-full p-3 mb-3 border rounded">
+                <textarea name="message" placeholder="Details" required class="w-full p-3 mb-3 border rounded h-32"></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold">Submit</button>
+                <button type="button" onclick="closeModal()" class="w-full mt-2 text-gray-500">Cancel</button>
             </form>
         </div>
     </div>
 
     <script>
-        function openModal() { document.getElementById('modal').classList.remove('hidden'); }
+        function openModal(item) {
+            document.getElementById('modal').classList.remove('hidden');
+            document.getElementById('hiddenItem').value = item;
+            document.getElementById('modalTitle').innerText = "Inquiry: " + item;
+        }
         function closeModal() { document.getElementById('modal').classList.add('hidden'); }
     </script>
 </body>
