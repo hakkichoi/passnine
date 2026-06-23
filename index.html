@@ -6,67 +6,68 @@
     <title>passnine | Global Trade Brokerage</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); }
-        .hero-bg { background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2000'); }
+        .section-full { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; }
+        .glass { background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .bg-img { background-size: cover; background-position: center; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-900 text-white">
 
-    <nav class="fixed w-full z-50 p-4 glass border-b border-white/20 flex justify-between items-center">
-        <h1 class="text-xl font-bold uppercase tracking-widest">passnine</h1>
-        <div class="hidden md:flex space-x-6 text-sm font-semibold">
-            <a href="#home" class="hover:text-blue-600">Home</a>
-            <a href="#history" class="hover:text-blue-600">History</a>
-            <a href="#sugar" class="hover:text-blue-600">Sugar</a>
-            <a href="#chicken" class="hover:text-blue-600">Chicken Paw</a>
-            <a href="#about" class="hover:text-blue-600">About</a>
+    <nav class="fixed w-full z-50 p-6 flex justify-between items-center glass">
+        <h1 class="text-2xl font-bold uppercase tracking-tighter">passnine</h1>
+        <div class="space-x-8 text-sm font-medium">
+            <a href="#home">Home</a><a href="#history">History</a><a href="#sugar">Sugar</a><a href="#chicken">Chicken</a><a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <section id="home" class="hero-bg h-screen bg-cover bg-center flex items-center justify-center text-white text-center">
-        <div>
-            <h2 class="text-5xl md:text-7xl font-bold mb-4">passnine</h2>
-            <p class="text-lg md:text-2xl">Brazilian Commodity Trading Brokerage</p>
+    <section id="home" class="section-full bg-img" style="background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?q=80&w=2000');">
+        <div class="glass p-12 rounded-3xl text-center">
+            <h2 class="text-6xl font-bold mb-4">passnine</h2>
+            <p class="text-xl">Your Premier Partner for Brazilian Commodities</p>
         </div>
     </section>
 
-    <main class="max-w-4xl mx-auto px-6 py-12 space-y-20">
-        <section id="history">
-            <h2 class="text-3xl font-bold mb-6">Company History</h2>
-            <p>2023년부터 브라질-중국, 브라질-한국, 중국-한국 간의 중개 무역을 전문으로 하고 있습니다.</p>
-        </section>
+    <section id="history" class="section-full bg-img" style="background-image: url('https://images.unsplash.com/photo-1521737711867-e3b97375f902?q=80&w=2000');">
+        <div class="glass p-12 rounded-3xl max-w-2xl">
+            <h2 class="text-4xl font-bold mb-6">Company History</h2>
+            <p class="text-lg">2023년부터 브라질-중국, 브라질-한국 간의 무역 중개 서비스를 제공하며, 신뢰와 안전을 최우선으로 성장해왔습니다.</p>
+        </div>
+    </section>
 
-        <section id="sugar">
-            <h2 class="text-3xl font-bold mb-6">Sugar Trade</h2>
-            <p class="mb-4">브라질산 ICUMSA45, VHP 제품 취급. SGS/CCIC 검사 진행 및 FCA/FOB/CIF 조건 협의.</p>
-            <button onclick="openModal('Sugar')" class="bg-blue-600 text-white px-6 py-2 rounded-full">Inquiry</button>
-        </section>
+    <section id="sugar" class="section-full bg-img" style="background-image: url('https://images.unsplash.com/photo-1589998059171-988d887df646?q=80&w=2000');">
+        <div class="glass p-12 rounded-3xl max-w-2xl">
+            <h2 class="text-4xl font-bold mb-6">Sugar Trade (ICUMSA45 / VHP)</h2>
+            <p class="mb-8">브라질산 프리미엄 설탕. SGS 및 CCIC 검사를 통한 확실한 품질 보증.</p>
+            <button onclick="openModal('Sugar')" class="bg-white text-slate-900 px-8 py-3 rounded-full font-bold">Request Inquiry</button>
+        </div>
+    </section>
 
-        <section id="chicken">
-            <h2 class="text-3xl font-bold mb-6">Chicken Paw</h2>
-            <p class="mb-4">BRF, JBS 제품 전문 취급. 안전한 거래를 위한 구매대행 서비스 제공.</p>
-            <button onclick="openModal('Chicken Paw')" class="bg-blue-600 text-white px-6 py-2 rounded-full">Inquiry</button>
-        </section>
+    <section id="chicken" class="section-full bg-img" style="background-image: url('https://images.unsplash.com/photo-1598103421283-e51785536424?q=80&w=2000');">
+        <div class="glass p-12 rounded-3xl max-w-2xl">
+            <h2 class="text-4xl font-bold mb-6">Chicken Paw Trade</h2>
+            <p class="mb-8">BRF 및 JBS 제품 취급. 전문 구매대행 서비스를 통해 안전한 국제 거래 지원.</p>
+            <button onclick="openModal('Chicken Paw')" class="bg-white text-slate-900 px-8 py-3 rounded-full font-bold">Request Inquiry</button>
+        </div>
+    </section>
 
-        <section id="about">
-            <h2 class="text-3xl font-bold mb-6">Contact</h2>
-            <p>최학기 (KMC FOUNDATION)</p>
-            <p>Email: choihakki@gmail.com</p>
-            <p>WhatsApp: +82-10-5561-7107</p>
-            <p>WeChat: hakki0729</p>
-        </section>
-    </main>
+    <section id="contact" class="section-full bg-img" style="background-image: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2000');">
+        <div class="glass p-12 rounded-3xl text-center">
+            <h2 class="text-4xl font-bold mb-6">Contact Us</h2>
+            <p class="text-lg">담당자: 최학기 (KMC FOUNDATION)</p>
+            <p class="text-lg">Email: choihakki@gmail.com | WhatsApp: +82-10-5561-7107</p>
+        </div>
+    </section>
 
-    <div id="modal" class="fixed inset-0 bg-black/60 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white p-8 rounded-2xl w-full max-w-lg shadow-2xl">
+    <div id="modal" class="fixed inset-0 bg-black/70 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-slate-900 p-8 rounded-3xl border border-white/20 w-full max-w-md">
             <h2 class="text-2xl font-bold mb-4" id="modalTitle">Inquiry</h2>
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="hidden" name="item" id="hiddenItem">
-                <input type="text" name="name" placeholder="Name (Required)" required class="w-full p-3 mb-3 border rounded">
-                <input type="email" name="email" placeholder="Email (Required)" required class="w-full p-3 mb-3 border rounded">
-                <textarea name="message" placeholder="Details" required class="w-full p-3 mb-3 border rounded h-32"></textarea>
-                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold">Submit</button>
-                <button type="button" onclick="closeModal()" class="w-full mt-2 text-gray-500">Cancel</button>
+                <input type="text" name="name" placeholder="Name" required class="w-full p-3 mb-3 bg-slate-800 border rounded-xl">
+                <input type="email" name="email" placeholder="Email" required class="w-full p-3 mb-3 bg-slate-800 border rounded-xl">
+                <textarea name="message" placeholder="Details" required class="w-full p-3 mb-3 bg-slate-800 border rounded-xl h-32"></textarea>
+                <button type="submit" class="w-full bg-blue-600 py-3 rounded-xl font-bold">Submit</button>
+                <button type="button" onclick="closeModal()" class="w-full mt-2 text-slate-400">Cancel</button>
             </form>
         </div>
     </div>
