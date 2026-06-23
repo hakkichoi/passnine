@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>passnine | Global Trade Brokerage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        section { min-height: 80vh; padding: 4rem 2rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="fixed w-full z-50 p-4 flex justify-between items-center glass">
+        <h1 class="text-xl font-bold uppercase">passnine</h1>
+        <div class="space-x-4 text-sm font-semibold">
+            <a href="#about">About</a> <a href="#sugar">Sugar</a> <a href="#chicken">Chicken</a> <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="h-screen flex items-center justify-center bg-cover bg-center text-white" 
+             style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9');">
+        <div class="text-center">
+            <h2 class="text-5xl font-bold mb-4">Connecting Brazil to the World</h2>
+            <p class="text-xl">Premium Brokerage: Sugar, Chicken Paws, and More</p>
+        </div>
+    </section>
+
+    <main class="max-w-5xl mx-auto">
+        <section id="sugar" class="glass rounded-3xl my-8">
+            <h2 class="text-3xl font-bold mb-6">Sugar Trade (ICUMSA45 / VHP)</h2>
+            <p>Origin: Brazil | SGS & CCIC Inspection | Flexible terms (FCA/FOB/CIF).</p>
+            <button onclick="openModal()" class="mt-6 bg-blue-600 text-white px-8 py-3 rounded-full">Request Inquiry</button>
+        </section>
+
+        <section id="chicken" class="glass rounded-3xl my-8">
+            <h2 class="text-3xl font-bold mb-6">Chicken Paw Trade</h2>
+            <p>Exclusive supply of BRF and JBS products. Quality guaranteed.</p>
+        </section>
+    </main>
+
+    <div id="modal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
+        <div class="bg-white p-8 rounded-2xl w-full max-w-lg">
+            <h2 class="text-2xl font-bold mb-4">Inquiry Request</h2>
+            <form action="https://formspree.io/f/YOUR_ID" method="POST">
+                <select name="item" class="w-full p-3 mb-4 border rounded">
+                    <option value="Sugar">ICUMSA45 / VHP</option>
+                    <option value="Chicken">Chicken Paw</option>
+                </select>
+                <input type="text" name="name" placeholder="Name" required class="w-full p-3 mb-4 border rounded">
+                <input type="email" name="email" placeholder="Email" required class="w-full p-3 mb-4 border rounded">
+                <textarea name="message" placeholder="Message" class="w-full p-3 mb-4 border rounded"></textarea>
+                <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded">Submit</button>
+                <button type="button" onclick="closeModal()" class="w-full mt-2 text-slate-400">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal() { document.getElementById('modal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('modal').classList.add('hidden'); }
+    </script>
+</body>
+</html>
