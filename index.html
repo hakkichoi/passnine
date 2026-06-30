@@ -300,6 +300,147 @@ section {
   line-height: 1.7;
 }
 
+/* ── ACTIVE DEALS ─────────────────────────────── */
+#deals {
+  background: #EEF3FB;
+  padding: 4.5rem 1.5rem;
+}
+#deals .section-header { margin-bottom: 2.5rem; }
+.deals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.deal-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(30,111,217,0.12);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border-radius: 12px;
+  padding: 1.1rem 1.5rem;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+}
+.deal-row:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: rgba(30,111,217,0.3);
+}
+.deal-tag {
+  flex-shrink: 0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 5px;
+  background: rgba(30,111,217,0.12);
+  color: var(--blue2);
+  text-transform: uppercase;
+}
+.deal-tag.gold { background: rgba(201,168,76,0.18); color: var(--gold2); }
+.deal-title {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--navy);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deal-summary {
+  flex: 2;
+  min-width: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.deal-date {
+  flex-shrink: 0;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.deal-arrow { flex-shrink: 0; color: var(--gold); font-size: 1.1rem; }
+.deals-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  background: rgba(255,255,255,0.5);
+  border-radius: 12px;
+}
+
+/* Mobile: card layout instead of row */
+@media (max-width: 700px) {
+  .deal-row {
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    padding: 1rem 1.1rem;
+  }
+  .deal-title {
+    white-space: normal;
+    flex-basis: 100%;
+    font-size: 0.92rem;
+  }
+  .deal-summary {
+    white-space: normal;
+    flex-basis: 100%;
+    font-size: 0.82rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .deal-date { order: 3; }
+  .deal-arrow { display: none; }
+}
+
+/* Deal detail popup */
+.deal-popup-box {
+  background: #fff;
+  border-radius: var(--radius);
+  width: 100%;
+  max-width: 600px;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(10,22,40,0.35);
+}
+.deal-popup-header {
+  background: var(--navy);
+  padding: 2rem 2rem 1.5rem;
+  position: relative;
+}
+.deal-popup-header .deal-tag { margin-bottom: 0.8rem; }
+.deal-popup-header h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+.deal-popup-header .deal-date {
+  color: rgba(255,255,255,0.5);
+  margin-top: 0.6rem;
+  display: block;
+}
+.deal-popup-body { padding: 1.8rem 2rem; }
+.deal-popup-body .deal-full-content {
+  font-size: 0.93rem;
+  color: #334155;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+.deal-popup-body .btn-primary {
+  width: 100%;
+  margin-top: 1.8rem;
+  text-align: center;
+}
+
 /* ── HISTORY ──────────────────────────────────── */
 #history {
   background: var(--navy);
@@ -859,6 +1000,20 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
+<!-- ── ACTIVE DEALS ────────────────────────────────────── -->
+<section id="deals">
+  <div class="container">
+    <div class="section-header">
+      <p class="eyebrow" data-i18n="deals_eyebrow">Active Trade Listings</p>
+      <h2 data-i18n="deals_h2">Current Deals in Progress</h2>
+      <p data-i18n="deals_p">Live trade opportunities currently being intermediated. Click any listing for full details.</p>
+    </div>
+    <div class="deals-list" id="dealsList">
+      <!-- Populated by JS from deals.json -->
+    </div>
+  </div>
+</section>
+
 <!-- ── HISTORY ─────────────────────────────────────────── -->
 <section id="history">
   <div class="container">
@@ -1169,6 +1324,22 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </div>
 
+<!-- ── DEAL DETAIL POPUP ────────────────────────────────── -->
+<div class="popup-overlay" id="dealPopupOverlay" onclick="closeDealPopupOutside(event)">
+  <div class="deal-popup-box">
+    <button class="popup-close" onclick="closeDealPopup()">✕</button>
+    <div class="deal-popup-header">
+      <span class="deal-tag" id="dealPopupTag">SUGAR</span>
+      <h3 id="dealPopupTitle">Deal Title</h3>
+      <span class="deal-date" id="dealPopupDate">2026-06-01</span>
+    </div>
+    <div class="deal-popup-body">
+      <div class="deal-full-content" id="dealPopupContent"></div>
+      <button class="btn-primary" onclick="closeDealPopup(); openPopup();" data-i18n="deal_inquire_btn">Inquire About This Deal</button>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ── TRANSLATIONS ─────────────────────────────── */
 const i18n = {
@@ -1179,6 +1350,9 @@ const i18n = {
     hero_h1:"Bridging Markets.<br/><em>Delivering Value.</em>",
     hero_p:"passnine intermediates premium Brazilian agricultural commodities — sugar and protein — connecting suppliers and buyers across Asia and beyond with reliability and transparency.",
     hero_btn1:"Inquire Now", hero_btn2:"Our Products", scroll:"Scroll",
+    deals_eyebrow:"Active Trade Listings", deals_h2:"Current Deals in Progress",
+    deals_p:"Live trade opportunities currently being intermediated. Click any listing for full details.",
+    deal_inquire_btn:"Inquire About This Deal",
     hist_eyebrow:"Company History", hist_h2:"From First Trade to<br/>Trusted Partnership",
     hist_p:"Founded on the principle of transparent intermediary trade, passnine has grown its presence across three continents since 2023.",
     hist_2023:"Established Brazil–China and Brazil–Korea trade corridors. First transactions in Brazilian sugar (ICUMSA45) and Chicken Paw successfully intermediated.",
@@ -1226,6 +1400,9 @@ const i18n = {
     hero_h1:"시장을 잇다.<br/><em>가치를 전달하다.</em>",
     hero_p:"passnine은 브라질산 프리미엄 농산물(설탕, 닭발)을 전문으로 하는 무역 중개 서비스로, 아시아 전역의 공급자와 구매자를 안전하고 투명하게 연결합니다.",
     hero_btn1:"문의하기", hero_btn2:"취급 제품", scroll:"스크롤",
+    deals_eyebrow:"진행중인 거래", deals_h2:"현재 진행중인 거래 리스트",
+    deals_p:"현재 중개 진행중인 실시간 거래 기회입니다. 클릭하시면 전체 내용을 확인하실 수 있습니다.",
+    deal_inquire_btn:"이 거래 문의하기",
     hist_eyebrow:"회사연혁", hist_h2:"첫 거래에서<br/>신뢰받는 파트너로",
     hist_p:"2023년 설립 이후 브라질, 중국, 한국을 잇는 투명한 중개 무역을 기반으로 성장해 왔습니다.",
     hist_2023:"브라질-중국, 브라질-한국 무역 루트 개설. 브라질산 설탕(ICUMSA45)과 닭발 첫 거래 성공.",
@@ -1273,6 +1450,9 @@ const i18n = {
     hero_h1:"Conectando Mercados.<br/><em>Entregando Valor.</em>",
     hero_p:"A passnine intermedia commodities agrícolas brasileiras premium — açúcar e proteína — conectando fornecedores e compradores na Ásia e além com confiabilidade e transparência.",
     hero_btn1:"Fazer Consulta", hero_btn2:"Nossos Produtos", scroll:"Rolar",
+    deals_eyebrow:"Negociações Ativas", deals_h2:"Negociações em Andamento",
+    deals_p:"Oportunidades de negociação em tempo real atualmente intermediadas. Clique em qualquer item para ver detalhes completos.",
+    deal_inquire_btn:"Consultar Sobre Esta Negociação",
     hist_eyebrow:"Histórico da Empresa", hist_h2:"Do Primeiro Negócio à<br/>Parceria de Confiança",
     hist_p:"Fundada no princípio do comércio intermediário transparente, a passnine expandiu sua presença em três continentes desde 2023.",
     hist_2023:"Estabelecimento dos corredores Brasil–China e Brasil–Coreia. Primeiras transações de açúcar brasileiro (ICUMSA45) e Pata de Frango.",
@@ -1320,6 +1500,9 @@ const i18n = {
     hero_h1:"连接市场，<br/><em>创造价值。</em>",
     hero_p:"passnine 专注于巴西优质农产品（糖类、鸡爪）的国际贸易中介服务，以可靠和透明的方式连接亚洲及全球的供应商与买家。",
     hero_btn1:"立即询价", hero_btn2:"我们的产品", scroll:"向下滚动",
+    deals_eyebrow:"正在进行的交易", deals_h2:"当前交易列表",
+    deals_p:"当前正在中介的实时交易机会。点击任意列表查看完整详情。",
+    deal_inquire_btn:"咨询此交易",
     hist_eyebrow:"公司历程", hist_h2:"从首次交易到<br/>值得信赖的合作伙伴",
     hist_p:"passnine 自 2023 年成立以来，秉承透明中介贸易的原则，在三大洲持续拓展业务。",
     hist_2023:"开辟巴西-中国、巴西-韩国贸易通道。成功完成巴西糖（ICUMSA45）和鸡爪的首批交易。",
@@ -1371,6 +1554,7 @@ function setLang(lang) {
     if (b.textContent.trim() === ({en:'EN',ko:'한국어',pt:'PT',zh:'中文'})[lang]) b.classList.add('active');
   });
   applyTranslations();
+  if (typeof renderDeals === 'function') renderDeals();
 }
 
 function applyTranslations() {
@@ -1400,6 +1584,76 @@ function closePopup() {
 function closePopupOutside(e) {
   if (e.target === document.getElementById('popupOverlay')) closePopup();
 }
+
+/* ── ACTIVE DEALS ─────────────────────────────── */
+let dealsData = [];
+
+const dealTagLabels = {
+  ICUMSA45: 'ICUMSA 45', VHP: 'VHP', ChickenPaw: 'Chicken Paw', Other: 'Other'
+};
+
+function truncate(str, n) {
+  if (!str) return '';
+  return str.length > n ? str.slice(0, n - 1) + '…' : str;
+}
+
+function renderDeals() {
+  const list = document.getElementById('dealsList');
+  if (!dealsData || dealsData.length === 0) {
+    const emptyText = currentLang === 'ko' ? '현재 등록된 거래가 없습니다. 곧 새로운 거래가 업데이트됩니다.'
+      : currentLang === 'pt' ? 'Nenhuma negociação listada no momento. Novas listagens em breve.'
+      : currentLang === 'zh' ? '目前没有正在进行的交易。请稍后查看更新。'
+      : 'No active deals listed right now. Check back soon for new listings.';
+    list.innerHTML = `<div class="deals-empty">${emptyText}</div>`;
+    return;
+  }
+  list.innerHTML = dealsData.map((deal, i) => {
+    const tagLabel = dealTagLabels[deal.tag] || deal.tag || 'Other';
+    const tagClass = (deal.tag === 'VHP' || deal.tag === 'Other') ? 'gold' : '';
+    return `
+      <div class="deal-row" onclick="openDealPopup(${i})">
+        <span class="deal-tag ${tagClass}">${tagLabel}</span>
+        <span class="deal-title">${truncate(deal.title, 60)}</span>
+        <span class="deal-summary">${truncate(deal.summary, 90)}</span>
+        <span class="deal-date">${deal.date || ''}</span>
+        <span class="deal-arrow">→</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function openDealPopup(index) {
+  const deal = dealsData[index];
+  if (!deal) return;
+  const tagLabel = dealTagLabels[deal.tag] || deal.tag || 'Other';
+  document.getElementById('dealPopupTag').textContent = tagLabel;
+  document.getElementById('dealPopupTitle').textContent = deal.title || '';
+  document.getElementById('dealPopupDate').textContent = deal.date || '';
+  document.getElementById('dealPopupContent').textContent = deal.content || deal.summary || '';
+  document.getElementById('dealPopupOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeDealPopup() {
+  document.getElementById('dealPopupOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeDealPopupOutside(e) {
+  if (e.target === document.getElementById('dealPopupOverlay')) closeDealPopup();
+}
+
+function loadDeals() {
+  fetch('deals.json?t=' + Date.now())
+    .then(r => r.ok ? r.json() : [])
+    .then(data => {
+      dealsData = Array.isArray(data) ? data : (data.deals || []);
+      renderDeals();
+    })
+    .catch(() => {
+      dealsData = [];
+      renderDeals();
+    });
+}
+loadDeals();
 
 /* Form submission via FormSubmit */
 document.getElementById('inquiryForm').addEventListener('submit', function(e) {
